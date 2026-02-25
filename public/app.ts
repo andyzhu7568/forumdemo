@@ -82,7 +82,7 @@ function setLoadMore(show: boolean, hasMore: boolean): void {
   loadMoreBtn.textContent = hasMore ? '加载更多' : '没有更多了';
 }
 
-async function loadMessages(append: boolean): void {
+async function loadMessages(append: boolean): Promise<void> {
   if (isLoading) return;
   if (!append) {
     currentPage = 1;
@@ -108,7 +108,7 @@ async function loadMessages(append: boolean): void {
   }
 }
 
-async function submitMessage(e: Event): void {
+async function submitMessage(e: Event): Promise<void> {
   e.preventDefault();
   formError.textContent = '';
   const author = authorInput.value.trim();
