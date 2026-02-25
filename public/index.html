@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>留言板</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>留言板</h1>
+        <p class="subtitle">发布并查看大家的留言</p>
+      </header>
+
+      <section class="post-form">
+        <h2>发布留言</h2>
+        <form id="form" class="form">
+          <div class="field">
+            <label for="author">昵称</label>
+            <input type="text" id="author" name="author" required maxlength="100" placeholder="你的昵称" />
+          </div>
+          <div class="field">
+            <label for="content">内容</label>
+            <textarea id="content" name="content" required maxlength="2000" rows="4" placeholder="写下你想说的话..."></textarea>
+            <span class="hint" id="contentHint">0 / 2000</span>
+          </div>
+          <button type="submit" class="btn btn-primary" id="submitBtn">发布</button>
+        </form>
+        <p id="formError" class="error" aria-live="polite"></p>
+      </section>
+
+      <section class="messages">
+        <h2>留言列表</h2>
+        <div id="messageList" class="message-list"></div>
+        <div id="loading" class="loading">加载中...</div>
+        <div id="empty" class="empty" hidden>暂无留言，来发第一条吧～</div>
+        <div id="loadMore" class="load-more" hidden>
+          <button type="button" class="btn btn-secondary" id="loadMoreBtn">加载更多</button>
+        </div>
+      </section>
+    </div>
+    <script src="/app.js"></script>
+  </body>
+</html>
