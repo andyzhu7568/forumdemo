@@ -99,8 +99,13 @@ async function submitMessage(e) {
     formError.textContent = '';
     const author = authorInput.value.trim();
     const content = contentInput.value.trim();
-    if (!author || !content)
+    // 用自定义校验提示替换浏览器默认的 "Please fill out this field"
+    authorInput.setCustomValidity(author ? '' : '请填写昵称');
+    contentInput.setCustomValidity(content ? '' : '请填写留言内容');
+    if (!form.checkValidity()) {
+        form.reportValidity();
         return;
+    }
     submitBtn.disabled = true;
     try {
         const res = await fetch(`${API_BASE}/api/messages`, {
@@ -129,7 +134,11 @@ async function submitMessage(e) {
 function updateContentHint(len) {
     contentHint.textContent = `${len} / 2000`;
 }
-contentInput.addEventListener('input', () => updateContentHint(contentInput.value.length));
+contentInput.addEventListener('input', () => {
+    updateContentHint(contentInput.value.length);
+    contentInput.setCustomValidity('');
+});
+authorInput.addEventListener('input', () => authorInput.setCustomValidity(''));
 form.addEventListener('submit', submitMessage);
 loadMoreBtn.addEventListener('click', () => {
     currentPage += 1;
